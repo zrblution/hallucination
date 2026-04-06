@@ -106,14 +106,6 @@ If you want to reproduce the same data pipeline, prepare:
 
 You can also create smaller subsets with the same schema as long as the `img`, `text`, and `labels` fields remain unchanged.
 
-## Training Setup
-
-This release documents only the `Ours` configuration:
-
-| Variant | Description | Key Settings |
-| --- | --- | --- |
-| `Ours` | All-layer evidence injection with evidence regularization | `--inject_position per_layer --inject_op ours --use_utilization true --lambda_orth 1.0 --lambda_ctr 1.0` |
-
 ## Training Commands
 
 All commands below use symbolic paths instead of machine-specific absolute paths:
@@ -145,7 +137,6 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nnodes 1 --nproc_per_node 4 --master-por
   --train_evidence_modules true \
   --enable_evidence true \
   --inject_position per_layer \
-  --inject_op ours \
   --use_utilization true \
   --evidence_source aligned \
   --gate_layers all \
@@ -175,7 +166,6 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nnodes 1 --nproc_per_node 4 --master-por
   --train_evidence_modules true \
   --enable_evidence true \
   --inject_position per_layer \
-  --inject_op ours \
   --use_utilization true \
   --evidence_source aligned \
   --gate_layers all \
@@ -205,7 +195,6 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nnodes 1 --nproc_per_node 4 --master-por
   --train_evidence_modules true \
   --enable_evidence true \
   --inject_position per_layer \
-  --inject_op ours \
   --use_utilization true \
   --evidence_source aligned \
   --gate_layers all \
@@ -220,7 +209,6 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nnodes 1 --nproc_per_node 4 --master-por
 - `--model_name_or_path`: path placeholder for the downloaded base model
 - `--output_dir`: directory used for checkpoints and preprocessing cache
 - `--inject_position`: set to `per_layer` for all-layer evidence injection
-- `--inject_op`: set to `ours` for the evidence fusion operator used in this release
 - `--lambda_orth`: weight of the orthogonality regularizer
 - `--lambda_ctr`: weight of the contrastive regularizer
 - `--aux_layers`: optional comma-separated layer indices for restricting the regularization scope
