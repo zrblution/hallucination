@@ -37,17 +37,17 @@ The repository currently supports:
 The original project was developed with the following software stack:
 
 - Python `3.11`
-- PyTorch `2.4.1+cu121`
+- PyTorch `2.4.1`
 - `datasets==4.4.2`
 - `deepspeed==0.15.1`
 - `accelerate==1.12.0`
-- a recent `transformers` build with Qwen3-VL support
+- `transformers==4.57.3`
 
 A minimal setup is:
 
 ```bash
-pip install torch datasets deepspeed accelerate pillow
-pip install git+https://github.com/huggingface/transformers
+pip install torch==2.4.1 datasets==4.4.2 deepspeed==0.15.1 accelerate==1.12.0 pillow
+pip install transformers==4.57.3
 ```
 
 ## Base Models
