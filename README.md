@@ -106,14 +106,12 @@ If you want to reproduce the same data pipeline, prepare:
 
 You can also create smaller subsets with the same schema as long as the `img`, `text`, and `labels` fields remain unchanged.
 
-## Training Variants
+## Training Setup
 
-The core training variants are:
+This release documents only the `Ours` configuration:
 
 | Variant | Description | Key Settings |
 | --- | --- | --- |
-| `+M` | First-layer evidence injection with cross-entropy only | `--inject_position first_layer_input --inject_op add --use_utilization false --lambda_orth 0.0 --lambda_ctr 0.0` |
-| `+M+A` | All-layer evidence injection with cross-entropy only | `--inject_position per_layer --inject_op ours --use_utilization true --lambda_orth 0.0 --lambda_ctr 0.0` |
 | `Ours` | All-layer evidence injection with evidence regularization | `--inject_position per_layer --inject_op ours --use_utilization true --lambda_orth 1.0 --lambda_ctr 1.0` |
 
 ## Training Commands
@@ -221,8 +219,8 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nnodes 1 --nproc_per_node 4 --master-por
 - `--training_image_dir`: path placeholder for the corresponding image directory
 - `--model_name_or_path`: path placeholder for the downloaded base model
 - `--output_dir`: directory used for checkpoints and preprocessing cache
-- `--inject_position`: where evidence is injected, such as `first_layer_input` or `per_layer`
-- `--inject_op`: evidence fusion operator, such as `add`, `concat`, or `ours`
+- `--inject_position`: set to `per_layer` for all-layer evidence injection
+- `--inject_op`: set to `ours` for the evidence fusion operator used in this release
 - `--lambda_orth`: weight of the orthogonality regularizer
 - `--lambda_ctr`: weight of the contrastive regularizer
 - `--aux_layers`: optional comma-separated layer indices for restricting the regularization scope
